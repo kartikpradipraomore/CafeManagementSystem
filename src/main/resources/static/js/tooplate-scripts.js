@@ -9,7 +9,7 @@ function drawLineChart() {
           {
             scaleLabel: {
               display: true,
-              labelString: "Hits"
+              labelString: "Orders"
             }
           }
         ]
@@ -18,7 +18,7 @@ function drawLineChart() {
 
     // Set aspect ratio based on window width
     optionsLine.maintainAspectRatio =
-      $(window).width() < width_threshold ? false : true;
+        $(window).width() < width_threshold ? false : true;
 
     configLine = {
       type: "line",
@@ -34,7 +34,7 @@ function drawLineChart() {
         ],
         datasets: [
           {
-            label: "Latest Hits",
+            label: "Pizza Orders",
             data: [88, 68, 79, 57, 50, 55, 70],
             fill: false,
             borderColor: "rgb(75, 192, 192)",
@@ -42,7 +42,7 @@ function drawLineChart() {
             pointRadius: 0
           },
           {
-            label: "Popular Hits",
+            label: "Burger Orders",
             data: [33, 45, 37, 21, 55, 74, 69],
             fill: false,
             borderColor: "rgba(255,99,132,1)",
@@ -50,7 +50,7 @@ function drawLineChart() {
             pointRadius: 0
           },
           {
-            label: "Featured",
+            label: "Coffee Orders",
             data: [44, 19, 38, 46, 85, 66, 79],
             fill: false,
             borderColor: "rgba(153, 102, 255, 1)",
@@ -81,7 +81,7 @@ function drawBarChart() {
             },
             scaleLabel: {
               display: true,
-              labelString: "Hits"
+              labelString: "Orders"
             }
           }
         ]
@@ -89,35 +89,35 @@ function drawBarChart() {
     };
 
     optionsBar.maintainAspectRatio =
-      $(window).width() < width_threshold ? false : true;
+        $(window).width() < width_threshold ? false : true;
 
     /**
      * COLOR CODES
-     * Red: #F7604D
-     * Aqua: #4ED6B8
-     * Green: #A8D582
-     * Yellow: #D7D768
-     * Purple: #9D66CC
-     * Orange: #DB9C3F
-     * Blue: #3889FC
+     * Pizza: #F7604D
+     * Burger: #4ED6B8
+     * Coffee: #A8D582
+     * Pasta: #D7D768
+     * Salad: #9D66CC
+     * Dessert: #DB9C3F
+     * Drinks: #3889FC
      */
 
     configBar = {
       type: "horizontalBar",
       data: {
-        labels: ["Red", "Aqua", "Green", "Yellow", "Purple", "Orange", "Blue"],
+        labels: ["Pizza", "Burger", "Coffee", "Pasta", "Salad", "Dessert", "Drinks"],
         datasets: [
           {
-            label: "# of Hits",
+            label: "# of Orders",
             data: [33, 40, 28, 49, 58, 38, 44],
             backgroundColor: [
-              "#F7604D",
-              "#4ED6B8",
-              "#A8D582",
-              "#D7D768",
-              "#9D66CC",
-              "#DB9C3F",
-              "#3889FC"
+              "#F7604D", // Pizza
+              "#4ED6B8", // Burger
+              "#A8D582", // Coffee
+              "#D7D768", // Pasta
+              "#9D66CC", // Salad
+              "#DB9C3F", // Dessert
+              "#3889FC"  // Drinks
             ],
             borderWidth: 0
           }
@@ -161,13 +161,13 @@ function drawPieChart() {
           {
             data: [18.24, 6.5, 9.15],
             backgroundColor: ["#F7604D", "#4ED6B8", "#A8D582"],
-            label: "Storage"
+            label: "Cafe Sales"
           }
         ],
         labels: [
-          "Used Storage (18.240GB)",
-          "System Storage (6.500GB)",
-          "Available Storage (9.150GB)"
+          "Pizza Sales (18.240GB)",
+          "Burger Sales (6.500GB)",
+          "Coffee Sales (9.150GB)"
         ]
       },
       options: optionsPie

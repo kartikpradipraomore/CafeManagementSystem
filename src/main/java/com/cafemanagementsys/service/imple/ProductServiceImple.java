@@ -1,5 +1,6 @@
 package com.cafemanagementsys.service.imple;
 
+import com.cafemanagementsys.entity.Admin;
 import com.cafemanagementsys.entity.Product;
 import com.cafemanagementsys.repository.ProductRepository;
 import com.cafemanagementsys.service.ProductService;
@@ -34,6 +35,13 @@ public class ProductServiceImple implements ProductService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // New method to get products by the admin
+    @Override
+    public List<Product> getProductsByAdmin(Admin admin) {
+        return productRepository.findByAdminId(admin);
+    }
+
 
     @Override
     public ResponseEntity<Product> getProductById(Integer id) {

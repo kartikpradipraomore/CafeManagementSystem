@@ -5,6 +5,7 @@ import com.cafemanagementsys.repository.AdminRepository;
 import com.cafemanagementsys.service.AdminService;
 import com.cafemanagementsys.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,7 @@ public class AdminController {
     @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("admin", new Admin());
-        return "/admin/signup";
+        return "admin/signup";
     }
 
     @PostMapping("/add")
@@ -53,18 +54,36 @@ public class AdminController {
     }
 
 
+
     // ========================== AFTER ADMIN LOGIN ===========================================================================================================
     @GetMapping("/index")
     public String index(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails userDetails) {
+            String email = userDetails.getUsername();
+            Admin admin = adminRepository.findByEmail(email); // Fetch full admin details
+            model.addAttribute("admin", admin);
+        }
         return "/admin/index";
     }
 
     @GetMapping("/products")
     public String products(Model model) {
-        List<Product> products = productService.gelAllProduct().getBody();
-        model.addAttribute("products", products);
+        // Fetch the authenticated Admin
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            String email = userDetails.getUsername();
+            Admin admin = adminRepository.findByEmail(email); // Fetch full admin details
+
+            // Fetch products belonging to the authenticated admin
+            List<Product> products = productService.getProductsByAdmin(admin);
+
+            model.addAttribute("products", products);
+        }
         return "/admin/products";
     }
+
 
     @GetMapping("/accounts")
     public String accounts(Model model) {
@@ -79,9 +98,40 @@ public class AdminController {
         return "/admin/accounts";
     }
 
+    @PostMapping("/accounts/update")
+    public String accountsUpdate(@ModelAttribute Admin formAdmin, Model model) {
+        adminService.updateAdmin(formAdmin);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails userDetails) {
+            String email = userDetails.getUsername();
+            Admin admin = adminRepository.findByEmail(email); // Fetch full admin details
+            model.addAttribute("admin", admin);
+        }
+        return "/admin/accounts";
+    }
+    @GetMapping("/account/delete/{id}")
+    public String accountDelete(@PathVariable String id, Model model) {
+        adminService.deleteAdmin(id);
+        return "redirect:/";
+    }
+
+
+
     @GetMapping("/add-product")
     public String addProduct(Model model) {
-        model.addAttribute("product",new Product());
+        // Fetch the authenticated Admin
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            String email = userDetails.getUsername();
+            Admin admin = adminRepository.findByEmail(email); // Fetch full admin details
+            model.addAttribute("admin", admin);
+
+            // Create a new Product object and associate the admin
+            Product product = new Product();
+            product.setAdminId(admin);  // Set the admin for the product
+            model.addAttribute("product", product);
+        }
         return "/admin/add-product";
     }
 
@@ -138,6 +188,13 @@ public class AdminController {
 
     }
 
+
+    // ===============================================================================================================================
+
+    @GetMapping("/bill")
+    public String bill(Model model) {
+        return "/admin/bill";
+    }
 
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +24,9 @@ public class Admin {
     private String email;
     private String phoneNumber;
     private String password;
+
+    @OneToMany(mappedBy = "adminId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Product> products;
 
 
     public Admin(String name, String email, String phoneNumber, String password) {

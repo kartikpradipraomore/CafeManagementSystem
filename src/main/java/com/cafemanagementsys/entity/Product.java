@@ -19,7 +19,11 @@ public class Product {
     private String imageFilename; // New field
     private String productCategory;
 
-    public Product(Integer productId, String productName, String productDescription, Double productPrice, Integer stockQuantity, String imageFilename, String productCategory) {
+    @ManyToOne
+    @JoinColumn(name = "admin_id")  // Use 'admin_id' as the foreign key column name
+    private Admin adminId;
+
+    public Product(Integer productId, String productName, String productDescription, Double productPrice, Integer stockQuantity, String imageFilename, String productCategory, Admin adminId) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -27,6 +31,7 @@ public class Product {
         this.stockQuantity = stockQuantity;
         this.imageFilename = imageFilename;
         this.productCategory = productCategory;
+        this.adminId = adminId;
     }
 
     public String getProductCategory() {
@@ -35,6 +40,14 @@ public class Product {
 
     public void setProductCategory(String productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public Admin getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(Admin adminId) {
+        this.adminId = adminId;
     }
 
     public Product() {

@@ -1,5 +1,6 @@
 package com.cafemanagementsys.service;
 
+import com.cafemanagementsys.entity.Admin;
 import com.cafemanagementsys.entity.Product;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,6 @@ public interface ProductService {
     ResponseEntity<Product> getProductById(Integer id);
     ResponseEntity<String> updateProduct(Integer id, Product product);
     ResponseEntity<String> deleteProduct(Integer id);
+    List<Product> getProductsByAdmin(Admin admin);
 
 }

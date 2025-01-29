@@ -7,5 +7,7 @@ import org.springframework.stereotype.Service;
 public interface AdminService {
 
     void addAdmin(Admin admin);
+    void updateAdmin(Admin admin);
+    void deleteAdmin(String id);
 
 }
