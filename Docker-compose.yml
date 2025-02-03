@@ -5,12 +5,13 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: kartik
+      POSTGRES_DB: cafemanagement  # ✅ Ensures the database is created
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
-      - postgres-network
+      - mynetwork  # ✅ Using mynetwork
     restart: unless-stopped
 
   pgadmin:
@@ -24,10 +25,26 @@ services:
     depends_on:
       - postgres
     networks:
-      - postgres-network
+      - mynetwork  # ✅ Using mynetwork
+
+  cafemansys:
+    image: cafe-man-sys
+    container_name: cafemansys
+    ports:
+      - "8085:8085"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cafemanagement
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: kartik
+      SPRING_PROFILES_ACTIVE: docker  # ✅ Fixed indentation
+    networks:
+      - mynetwork  # ✅ Using mynetwork
 
 volumes:
   postgres_data:
 
 networks:
-  postgres-network:
+  mynetwork:
+    external: true  # ✅ Using your created external network

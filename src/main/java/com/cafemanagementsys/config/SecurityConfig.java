@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/signup", "/admin/add").permitAll() // Allow signup and admin addition
+                        .requestMatchers("/admin/signup", "/admin/add","/admin/login").permitAll() // Allow signup and admin addition
                         .requestMatchers("/admin/**").hasRole("ADMIN") // Protect other /admin routes
                         .anyRequest().permitAll()
                 )

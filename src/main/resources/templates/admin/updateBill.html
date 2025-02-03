@@ -232,7 +232,7 @@
 
     <!-- Main Content -->
     <div class="container">
-        <form id="billingForm" th:action="@{/admin/bill}" method="post" th:object="${bills}">
+        <form id="billingForm" th:object="${bills}" th:action="@{'/admin/bill/update/'+${bills.getId()}}" method="post" >
 
             <input type="hidden" th:field="*{adminId.id}"/>
 
@@ -251,7 +251,7 @@
                 <input type="number" id="productPrice" name="productPrice" class="form-control"
                        placeholder="Enter Price" th:value="${bills.productPrice}">
             </div>
-            <button type="submit" class="btn btn-primary">Add Item</button>
+            <button type="submit" class="btn btn-primary">Update Bill</button>
         </form>
 
         <table class="table mt-4">
