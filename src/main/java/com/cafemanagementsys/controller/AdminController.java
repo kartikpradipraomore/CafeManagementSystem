@@ -7,7 +7,6 @@ import com.cafemanagementsys.service.AdminService;
 import com.cafemanagementsys.service.BillsService;
 import com.cafemanagementsys.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -266,7 +268,7 @@ public class AdminController {
             model.addAttribute("totalPrice",total);
         }
 
-        return "redirect:/admin/bill";
+        return "redirect:/admin/showAllBills";
     }
 
     @GetMapping("/bill/update/{id}")
@@ -312,8 +314,28 @@ public class AdminController {
             model.addAttribute("totalPrice",total);
         }
 
-        return "redirect:/admin/bill";
+        return "redirect:/admin/showAllBills";
     }
+
+    @GetMapping("/showAllBills")
+    public String showAllBills(Model model) {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails userDetails) {
+            String email = userDetails.getUsername();
+            Admin admin = adminRepository.findByEmail(email); // Fetch full admin details
+
+            // Fetch products belonging to the authenticated admin
+            List<Bills> Bills = billsService.getBillsByAdminId(admin);
+
+            model.addAttribute("allBills", Bills);
+            int total = billsService.totalPriceOfBills(admin);
+            model.addAttribute("totalPrice", total);
+        }
+
+        return "/admin/showAllBills";
+    }
+    
 
 
 

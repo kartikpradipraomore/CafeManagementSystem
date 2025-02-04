@@ -1,12 +1,6 @@
 package com.cafemanagementsys.entity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Entity
 @Table(name = "bills")

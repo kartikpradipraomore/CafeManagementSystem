@@ -133,7 +133,7 @@
             color: #ecf0f1;
         }
 
-        /* Total Summary */
+       /* Total Summary */
         .total-summary {
             margin-top: 20px;
             padding: 15px;
@@ -213,7 +213,7 @@
     <!-- Sidebar -->
     <div class="left-panel">
 
-        <a href="/admin/showAllBills"><button>See All Bills</button></a>
+        <a href="/admin/bill"><button>Back To Billing System</button></a>
 
         <h3 style="text-align: center">Bill History</h3>
         <div class="billing-list">
@@ -232,30 +232,8 @@
 
     <!-- Main Content -->
     <div class="container">
-        <form id="billingForm" th:action="@{/admin/bill}" method="post" th:object="${bills}">
-                    <h1 style="text-align: center; color: #f1c40f; font-weight: 900; text-shadow: #2c3e50;">Take's Yours Bill</h1>
-
-
-            <input type="hidden" th:field="*{adminId.id}"/>
-
-            <div class="form-group">
-                <label for="productName">Product</label>
-                <input type="text" id="productName" name="productName" class="form-control"
-                       placeholder="Enter Product Name" th:value="${bills.productName}">
-            </div>
-            <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Enter Quantity"
-                       th:value="${bills.quantity}">
-            </div>
-            <div class="form-group">
-                <label for="productPrice">Price per Unit</label>
-                <input type="number" id="productPrice" name="productPrice" class="form-control"
-                       placeholder="Enter Price" th:value="${bills.productPrice}">
-            </div>
-            <button type="submit" class="btn btn-primary">Add Item</button>
-        </form>
-        <!-- <table class="table mt-4">
+        <h1 style="text-align: center; color: #f1c40f; font-weight: 900; text-shadow: #2c3e50;">Here's Yours All Bills</h1>
+         <table class="table mt-4">
             <thead>
             <tr>
                 <th>Date</th>
@@ -284,7 +262,7 @@
                 </td>
             </tr>
             </tbody>
-        </table> -->
+        </table>
 
 
         <div class="total-summary text-center" >
