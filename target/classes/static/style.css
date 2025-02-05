@@ -1,0 +1,155 @@
+/* Navbar Styling */
+.navbar {
+    background-color: #1e2a38;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Logo */
+.navbar-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Navbar Links */
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Adds spacing between links */
+    align-items: center;
+}
+
+.navbar-links .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+/* Navbar Link Styling */
+.navbar-links a {
+    color: #d1d9e6;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.navbar-links a:hover {
+    color: #1abc9c;
+    background-color: #3b4d61;
+}
+
+/* Operations Section (Remove old icon, add settings icon) */
+.navbar-links .operations-link {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+.navbar-links .operations-link i {
+    font-size: 1.2rem;
+    color: #d1d9e6;
+}
+
+/* Dropdown Styling */
+.dropdown {
+    position: relative;
+}
+
+/* Remove arrow */
+.dropdown-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1e2a38;
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    color: #d1d9e6;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 8px 15px;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #3b4d61;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Logout Button */
+.logout-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logout-btn {
+        margin-top: 10px;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+    }
+}
+
+
+
+
