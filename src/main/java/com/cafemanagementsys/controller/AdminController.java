@@ -290,7 +290,7 @@ public class AdminController {
             int total = billsService.totalPriceOfBills(admin);
             model.addAttribute("totalPrice",total);
         }
-        return "/admin/updateBill";
+        return "admin/updateBill";
     }
 
 
@@ -333,7 +333,7 @@ public class AdminController {
             model.addAttribute("totalPrice", total);
         }
 
-        return "/admin/showAllBills";
+        return "admin/showAllBills";
     }
     
 
